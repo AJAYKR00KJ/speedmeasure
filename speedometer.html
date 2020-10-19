@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graphical Speedometer| @jay</title>
+    
+    <style type="text/css">
+        .main {
+
+  width: 100%;
+  max-width: 250px;
+  font-size: 18px;
+  font-weight: bold;
+  
+border:2px solid white;
+padding: 32px;
+
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	
+	margin: auto;
+}
+.status{
+
+    animation:blinkingText 1s infinite;
+    text-align: center;color: orange;
+}
+@keyframes blinkingText{
+    /*0%{     color: #000;    }
+    49%{    color: #000; }*/
+    60%{    color: transparent; }
+    75%{    color:transparent;  }
+    /*100%{   color: #000;    }*/
+}
+.speedometer_cover {
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 25%;
+  box-sizing: border-box;
+   width: 75%;
+  height: 150%;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: orange;
+}
+#val{
+	width: 90px;border-radius: 7px;height: 20px;text-align: center;color: white;background-color: black;
+	font-size: 18px;font-weight: bold;
+}
+
+.sub{
+	font-size: 18px;font-weight: bold;color: white;background-color: black;border-radius: 7px;
+}
+.speedometer_body {
+  width: 100%;
+  height: 0;
+  padding-bottom: 50%;
+  background: #FBFCFC;
+  position: relative;
+  border-top-left-radius: 100% 200%;
+  border-top-right-radius: 100% 200%;
+  overflow: hidden;
+}
+
+.speedometer_filler {
+	 height: 100%;
+  background: orange;
+  transform-origin: center top;
+  transform: rotate(0.25turn);
+  transition: transform 0.4s ease-out;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: inherit;
+ 
+}
+
+
+
+    </style>
+   <script type="text/javascript">
+   	
+      
+        
+        
+function setValue() {
+		var value= document.getElementById("val").value;
+
+      
+      	const main = document.querySelector(".main");
+  if (value < 0 || value > 100) {
+    alert("Invalid Input, Please Choose b/w 1 to 100");
+    return;
+  }
+ 
+   if(value<=40 )
+  { main.querySelector(".speedometer_filler").style.background = `green`;
+    main.querySelector(".speedometer_cover").style.color = `green`;
+     main.querySelector(".status").style.color = `green`;
+      main.querySelector(".status").style.animation = `blinkingText 0s infinite`;
+    var element =  main.querySelector(".status");
+    element.innerHTML = "Status:Safe";
+  }
+   if(value>40 )
+  { main.querySelector(".speedometer_filler").style.background = `orange`;
+     main.querySelector(".speedometer_cover").style.color = `orange`;
+     main.querySelector(".status").style.color = `orange`;
+      main.querySelector(".status").style.animation = `blinkingText 1s infinite`;
+    var element =  main.querySelector(".status");
+    element.innerHTML = "Status:Risk";
+  }
+
+  if(value>=70)
+  { main.querySelector(".speedometer_filler").style.background = `red`;
+     main.querySelector(".speedometer_cover").style.color = `red`;
+     main.querySelector(".status").style.color = `red`;
+      main.querySelector(".status").style.animation = `blinkingText .5s infinite`;
+    var element =  main.querySelector(".status");
+    element.innerHTML = "Status:Danger<br/>";
+  }
+  main.querySelector(".speedometer_filler").style.transform = `rotate(${
+    value / 200
+  }turn)`;
+
+  main.querySelector(".speedometer_cover").textContent = `${Math.round(
+    value
+  )}Km/hr`;
+
+  
+}
+
+      
+   </script>
+</head>
+
+<body style="color:white;align-content: center;background-color:black;">
+	<div style="text-align: center;padding-top: 20px;"> SPEEDOMETER</div><br>
+	<div style="">
+   <div class="main" >
+  <div class="speedometer_body">
+    <div class="speedometer_filler"></div>
+    <div class="speedometer_cover">50Km/hr</div>
+  </div>
+  <hr>
+<div class="status">Status: Risk</div>
+  <hr>
+   <div style="text-align: center;">
+    	<label style="font-size: 18px;" for="quantity">Choose (between 0 and 100) and click "show" button</label><br/><br/>
+       <input id="val" value="50" type="number" min="0" max="100" >
+       <input  class="sub" type="submit" value="Show" name="Submit" onclick="setValue()">
+     
+    </div>
+</div>
+</div>
+<div style="text-align: center;padding-top: 20px;"> By: Ajay Kumar<br/><a target=" " href="https://github.com/AJAYKR00KJ">Github Profile</a></div><br>
+</body>
+</html>
+
